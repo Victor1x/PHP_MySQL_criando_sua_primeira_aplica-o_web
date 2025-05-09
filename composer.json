@@ -1,0 +1,14 @@
+{
+  "name": "victor0x/crud",
+  "description": "crud",
+
+  "autoload": {
+    "psr-4": {
+      "Crud\\": "src/"
+    }
+  },
+
+  "require": {
+    "ext-pdo": "*"
+  }
+}

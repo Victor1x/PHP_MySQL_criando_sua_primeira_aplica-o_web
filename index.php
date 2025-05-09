@@ -1,119 +1,103 @@
 <?php
 
-require_once "src/conexao-bd.php";
-require_once "src/Modelo/Produto.php";
+require_once __DIR__ . "/vendor/autoload.php";
 
-$query = "SELECT * FROM produtos ";
-$pdo = Connection::createConnection();
-$stmt = $pdo->prepare($query);
-$stmt->execute();
-$date = $stmt->fetchAll();
+use Crud\Domain\Modelo\Produto;
+use Crud\Domain\ValueObject\ImageFilename;
+use Crud\Domain\ValueObject\Money;
+use Crud\Infrastructure\Persistence\Connection;
+use Crud\Infrastructure\Repository\ProdutoRepositoryPdo;
 
-$coffeeMenuItems = [];
-$lunchMenuItems = [];
+$connection = Connection::createConnection();
 
-function ordenarItems(array $items): array
-{
-  usort($items, fn ($a, $b): int =>  $a['preco'] <=> $b['preco'] // Comparação    numérica
-  );
-  return $items;
-}
+$ProdutoRepository = new ProdutoRepositoryPdo($connection);
 
-foreach ($date as $row) {
-  if ($row["tipo"] === "Café") {
-    $coffeeMenuItems[] = $row;
-    $coffeeMenuItems = ordenarItems($coffeeMenuItems);
-  } else {
-    $lunchMenuItems[] = $row;
-  }
-}
+$dadosCafe = $ProdutoRepository->findAllByType("Café");
 
-$coffeeMenuItems = ordenarItems($coffeeMenuItems);
-$lunchMenuItems = ordenarItems($lunchMenuItems);
+$dadoslunch = $ProdutoRepository->findAllByType("Almoço");
 
-$dadosCafe = array_map(
-  fn(array $item): Produto => new Produto(
-    $item["id"],
-    $item['tipo'],
-    $item['nome'],
-    $item['descricao'],
-    $item['imagem'],
-    $item['preco']
-  ),
-  $coffeeMenuItems
+
+$newObject = new Produto(
+    1,                              // id (int)
+    'produto',                      // type (string)
+    'Camiseta Básica',             // name (string)
+    'Camiseta de algodão 100%',    // description (string)
+    new ImageFilename('camiseta.jpg'), // image (ImageFilename)
+    new Money(10)                // price (Money em reais, por exemplo)
 );
-var_dump($coffeeMenuItems);
+var_dump($newObject->getAll());
 var_dump($dadosCafe);
-?>
+?>;
 
 
 <!doctype html>
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" href="img/icone-serenatto.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="img/icone-serenatto.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
-  <title>Serenatto - Cardápio</title>
+    <title>Serenatto - Cardápio</title>
 </head>
 
 <body>
-  <main>
+<main>
     <section class="container-banner">
-      <div class="container-texto-banner">
-        <img src="img/logo-serenatto.png" class="logo" alt="logo-serenatto">
-      </div>
+        <div class="container-texto-banner">
+            <img src="img/logo-serenatto.png" class="logo" alt="logo-serenatto">
+        </div>
     </section>
     <h2>Cardápio Digital</h2>
     <section class="container-cafe-manha">
-      <div class="container-cafe-manha-titulo">
-        <h3>Opções para o Café</h3>
-        <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
-      </div>
-      <div class="container-cafe-manha-produtos">
-        <?php foreach ($dadosCafe as $coffeeItem) : ?>
-          <div class="container-produto">
-            <div class="container-foto">
-              <img src=" img/<?= $coffeeItem->get_image() ?>">
-            </div>
-            <p><?= $coffeeItem->get_name() ?></p> <!--esse previacao sigifica php echo-->
-            <p><?= $coffeeItem->get_description() ?></p>
-            <p><?= "R$ " . $coffeeItem->get_price() ?></p>
-          </div>
-        <?php endforeach; ?>
-      </div>
+        <div class="container-cafe-manha-titulo">
+            <h3>Opções para o Café</h3>
+            <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
+        </div>
+        <div class="container-cafe-manha-produtos">
+            <?php foreach ($dadosCafe as $coffeeItem) : ?>
+                <div class="container-produto">
+                    <div class="container-foto">
+                        <img src="<?= $coffeeItem->getAll()['image']->getPath() ?>" alt="fotos de produtos">
+                    </div>
+                    <p><?= $coffeeItem->get_name() ?></p>   <!--esse previacao sigifica php echo-->
+                    <p><?= $coffeeItem->get_description() ?></p>
+                    <p><?= $coffeeItem->get_price()->format() ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </section>
     <section class="container-almoco">
-      <div class="container-almoco-titulo">
-        <h3>Opções para o Almoço</h3>
-        <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
-      </div>
-      <div class="container-almoco-produtos">
+        <div class="container-almoco-titulo">
+            <h3>Opções para o Almoço</h3>
+            <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
+        </div>
+        <div class="container-almoco-produtos">
 
-        <?php foreach ($lunchMenuItems as  $lunchItem) : ?>
-          <div class="container-produto">
-            <div class="container-foto">
-              <img src=" img/<?= $lunchItem['imagem'] ?>">
-            </div>
-            <p><?= $lunchItem['nome'] ?></p> <!--esse previacao sigifica php echo-->
-            <p><?= $lunchItem['descricao'] ?></p>
-            <p><?= "R$ " . $lunchItem['preco'] ?></p>
-          </div>
-        <?php endforeach; ?>
-      </div>
+            <?php foreach ($dadoslunch as $lunchItem): ?>
+                <div class="container-produto">
+                    <div class="container-foto">
+                        <img src="<?= $lunchItem->get_image()->getPath() ?>" alt="fotos de produtos">
+                    </div>
+                    <p><?= $lunchItem->get_name() ?></p> <!--esse previacao sigifica php echo-->
+                    <p><?= $lunchItem->get_description() ?></p>
+                    <p><?= $lunchItem->get_price()->format() ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </section>
-  </main>
-  <script src="js/index.js"></script>
+</main>
+<script src="js/index.js"></script>
 </body>
 
 </html>
