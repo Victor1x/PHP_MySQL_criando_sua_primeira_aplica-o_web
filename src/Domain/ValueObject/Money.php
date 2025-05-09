@@ -29,7 +29,7 @@ final class Money{
     public function format(): string
     {
         // formata com separador de milhar e duas casas decimais
-        return " R$ ". number_format($this->amount, 2, ',', '.')  ;
+        return "R$ ". number_format($this->amount, 2, ',', '.')  ;
     }
 
     public function equals(Money $other): bool

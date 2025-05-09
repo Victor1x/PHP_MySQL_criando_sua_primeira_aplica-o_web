@@ -1,34 +1,35 @@
 
-.container-admin-banner{
+.container-admin-banner {
     display: flex;
     align-items: center;
     flex-direction: column;
     margin: 80px 0px 20px;
 }
 
-.logo-admin{
+.logo-admin {
     width: 400px;
 }
 
-h2{
+h2 {
     font-size: 24px;
 }
 
-.container-table{
+.container-table {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-table{
+table {
     width: 90%;
     margin: auto 0;
 }
-table, th, td{
+
+table, th, td {
     border: 1px solid #EBC181;
 }
 
-table th{
+table th {
     padding: 11px 0 11px;
     background-color: #EBC181;
     color: #333B1E;
@@ -38,22 +39,23 @@ table th{
     padding: 8px;
 }
 
-table tr{
+table tr {
     border: 1px solid #ddd;
 }
 
-table td{
+table td {
     color: #FFF;
     font-size: 18px;
     padding: 8px;
 }
-.container-admin-banner h1{
+
+.container-admin-banner h1 {
     margin-top: 40px;
     font-size: 30px;
     color: #EBC181;
 }
 
-.container-lista-produtos{
+.container-lista-produtos {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,7 +63,7 @@ table td{
     margin: auto 0;
 }
 
-.container-lista{
+.container-lista {
     width: 90%;
     display: flex;
     justify-content: space-between;
@@ -72,13 +74,13 @@ table td{
     margin: 3px 0;
 }
 
-.container-lista h3{
+.container-lista h3 {
     color: #FFFFFF;
     font-weight: 600;
     font-size: 20px;
 }
 
-table tbody tr td a, .botao-cadastrar, .botao-excluir{
+table tbody tr td a, .botao-cadastrar, .botao-excluir {
     padding: 3px 10px;
     border-radius: 10px;
     color: #FFFFFF;
@@ -90,12 +92,12 @@ table tbody tr td a, .botao-cadastrar, .botao-excluir{
 }
 
 
-table tbody tr td a:hover, .botao-cadastrar:hover, .botao-excluir:hover{
+table tbody tr td a:hover, .botao-cadastrar:hover, .botao-excluir:hover {
     cursor: pointer;
     filter: saturate(150%);
 }
 
-.botao-cadastrar{
+.botao-cadastrar {
     background: #EBC181;
     color: #333B1E;
     font-weight: 600;
@@ -107,10 +109,16 @@ table tbody tr td a:hover, .botao-cadastrar:hover, .botao-excluir:hover{
 }
 
 
-.botao-editar{
+.botao-editar {
     background: #9B8357;
 }
 
-.botao-excluir{
+.botao-excluir {
     background: crimson;
+}
+
+.conteiner__link_cadasto__form_baixar {
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
 }

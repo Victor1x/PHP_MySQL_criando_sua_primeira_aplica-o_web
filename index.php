@@ -2,9 +2,6 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-use Crud\Domain\Modelo\Produto;
-use Crud\Domain\ValueObject\ImageFilename;
-use Crud\Domain\ValueObject\Money;
 use Crud\Infrastructure\Persistence\Connection;
 use Crud\Infrastructure\Repository\ProdutoRepositoryPdo;
 
@@ -16,17 +13,6 @@ $dadosCafe = $ProdutoRepository->findAllByType("Café");
 
 $dadoslunch = $ProdutoRepository->findAllByType("Almoço");
 
-
-$newObject = new Produto(
-    1,                              // id (int)
-    'produto',                      // type (string)
-    'Camiseta Básica',             // name (string)
-    'Camiseta de algodão 100%',    // description (string)
-    new ImageFilename('camiseta.jpg'), // image (ImageFilename)
-    new Money(10)                // price (Money em reais, por exemplo)
-);
-var_dump($newObject->getAll());
-var_dump($dadosCafe);
 ?>;
 
 

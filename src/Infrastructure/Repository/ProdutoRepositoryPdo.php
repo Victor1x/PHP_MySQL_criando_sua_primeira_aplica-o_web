@@ -28,6 +28,18 @@ class ProdutoRepositoryPdo
     return $this->hydrateList($data);
   }
 
+  public function findAll():array{
+    $query = "SELECT * FROM produtos ORDER BY preco";
+
+    $stmt = $this->pdo->prepare($query);
+
+    $stmt->execute();
+
+    $data = $stmt->fetchAll();
+
+    return $this->hydrateList($data);
+  }
+
   private function hydrateList(array $list): array
   {
     return array_map(
