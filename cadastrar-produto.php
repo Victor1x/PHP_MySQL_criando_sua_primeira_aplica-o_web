@@ -1,3 +1,25 @@
+<?php
+
+    require_once __DIR__ . "/vendor/autoload.php";
+
+    use Crud\Application\Service\CadastrarProdutoService;
+    use Crud\Infrastructure\Persistence\Connection;
+    use Crud\Infrastructure\Repository\ProdutoRepository;
+    use Crud\Presentation\Controller\CadastrarProdutoController;
+
+    $connection = Connection::getConnection();
+
+    $produtoRepository       = new ProdutoRepository($connection);
+    $cadastrarProdutoService = new CadastrarProdutoService($produtoRepository);
+    $controller              = new CadastrarProdutoController($cadastrarProdutoService);
+    
+    
+    if (isset($_POST['cadastro'])) {
+        $controller->handle($_POST, $_FILES['imagem']['name']);
+        header("Location: admin.php");
+    }
+?>
+
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -12,20 +34,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" href="img/icone-serenatto.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
+          rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Serenatto - Cadastrar Produto</title>
 </head>
 <body>
-<main>
+  
     <section class="container-admin-banner">
         <img src="img/logo-serenatto-horizontal.png" class="logo-admin" alt="logo-serenatto">
         <h1>Cadastro de Produtos</h1>
-        <img class= "ornaments" src="img/ornaments-coffee.png" alt="ornaments">
+        <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
     </section>
     <section class="container-form">
-        <form action="#">
-
+        <form method="post" enctype="multipart/form-data">
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" required>
             <div class="container-radio">
@@ -42,19 +64,20 @@
             <input type="text" id="descricao" name="descricao" placeholder="Digite uma descrição" required>
 
             <label for="preco">Preço</label>
-            <input type="text" id="preco" name="preco" placeholder="Digite uma descrição" required>
+            <input type="text" id="preco" name="preco" placeholder="Digite o preço" required>
 
             <label for="imagem">Envie uma imagem do produto</label>
             <input type="file" name="imagem" accept="image/*" id="imagem" placeholder="Envie uma imagem">
 
             <input type="submit" name="cadastro" class="botao-cadastrar" value="Cadastrar produto"/>
         </form>
-    
     </section>
 </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"
+        integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="js/index.js"></script>
 </body>
 </html>

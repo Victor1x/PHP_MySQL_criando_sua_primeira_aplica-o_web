@@ -109,3 +109,22 @@ h2 {
 .ornaments {
   width: 200px;
 }
+
+
+
+header{
+border: 2px solid red;
+}
+nav{
+  display: flex;
+  justify-content: end;
+  border: 2px solid blue;
+
+}
+ul{
+  display: flex;
+  justify-content: space-around;
+  border: 2px solid green;
+  gap: 20px	;
+}
+

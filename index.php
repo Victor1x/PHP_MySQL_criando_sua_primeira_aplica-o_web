@@ -2,18 +2,20 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
+use Crud\Application\Service\ListarProdutosService;
 use Crud\Infrastructure\Persistence\Connection;
-use Crud\Infrastructure\Repository\ProdutoRepositoryPdo;
+use Crud\Infrastructure\Repository\ProdutoRepository;
+use Crud\Presentation\Controller\ListarProdutosController;
 
-$connection = Connection::createConnection();
+$connection = Connection::getConnection();
+$produtoRepository = new ProdutoRepository($connection);
+$listarProdutosService = new ListarProdutosService($produtoRepository);
+$controller = new ListarProdutosController($listarProdutosService);
 
-$ProdutoRepository = new ProdutoRepositoryPdo($connection);
-
-$dadosCafe = $ProdutoRepository->findAllByType("Café");
-
-$dadoslunch = $ProdutoRepository->findAllByType("Almoço");
-
-?>;
+$dados = $controller->handle(1);
+$dadosCafe = $dados['cafe'];
+$dadoslunch = $dados['almoco'];
+?>
 
 
 <!doctype html>
@@ -38,6 +40,15 @@ $dadoslunch = $ProdutoRepository->findAllByType("Almoço");
 </head>
 
 <body>
+<header>
+        <nav>
+            <ul>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="cadastro.php">Cadastro</a></li>
+            </ul>
+        </nav>
+    </header>
+<main>
 <main>
     <section class="container-banner">
         <div class="container-texto-banner">
@@ -51,14 +62,14 @@ $dadoslunch = $ProdutoRepository->findAllByType("Almoço");
             <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
         </div>
         <div class="container-cafe-manha-produtos">
-            <?php foreach ($dadosCafe as $coffeeItem) : ?>
+            <?php foreach ($dadosCafe as $coffeeItem): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="<?= $coffeeItem->getAll()['image']->getPath() ?>" alt="fotos de produtos">
+                        <img src="<?php echo $coffeeItem->getImagem()->getPath() ?>" alt="fotos do produtos">
                     </div>
-                    <p><?= $coffeeItem->get_name() ?></p>   <!--esse previacao sigifica php echo-->
-                    <p><?= $coffeeItem->get_description() ?></p>
-                    <p><?= $coffeeItem->get_price()->format() ?></p>
+                    <p><?= $coffeeItem->getNome() ?></p>   <!--esse previacao sigifica php echo-->
+                    <p><?php echo $coffeeItem->getDescricao() ?></p>
+                    <p><?php echo $coffeeItem->getPreco()->format() ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -73,11 +84,11 @@ $dadoslunch = $ProdutoRepository->findAllByType("Almoço");
             <?php foreach ($dadoslunch as $lunchItem): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="<?= $lunchItem->get_image()->getPath() ?>" alt="fotos de produtos">
+                        <img src="<?php echo $lunchItem->getImagem()->getPath() ?>" alt="fotos do produtos">
                     </div>
-                    <p><?= $lunchItem->get_name() ?></p> <!--esse previacao sigifica php echo-->
-                    <p><?= $lunchItem->get_description() ?></p>
-                    <p><?= $lunchItem->get_price()->format() ?></p>
+                    <p><?php echo $lunchItem->getNome() ?></p> <!--esse previacao sigifica php echo-->
+                    <p><?php echo $lunchItem->getDescricao() ?></p>
+                    <p><?php echo $lunchItem->getPreco()->format() ?></p>
                 </div>
             <?php endforeach; ?>
         </div>

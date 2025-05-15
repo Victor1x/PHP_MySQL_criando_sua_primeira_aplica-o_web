@@ -1,14 +1,21 @@
 <?php
 require_once __DIR__ . "/vendor/autoload.php";
 
+use Crud\Application\Service\ListarProdutosService;
 use Crud\Infrastructure\Persistence\Connection;
-use Crud\Infrastructure\Repository\ProdutoRepositoryPdo;
+use Crud\Infrastructure\Repository\ProdutoRepository;
+use Crud\Presentation\Controller\ListarProdutosController;
 
-$connection = Connection::createConnection();
+$connection = Connection::getConnection();
 
-$ProdutoRepository = new ProdutoRepositoryPdo($connection);
+$produtoRepository = new ProdutoRepository($connection);
+$listarProdutosService = new ListarProdutosService($produtoRepository);
+$controller = new ListarProdutosController($listarProdutosService);
+$dados = $controller->handle();
+$todosProdutos = $dados['todosProdutos'];
 
-$dados = $ProdutoRepository->findAll();
+
+// $dados = $ProdutoRepository->findAll();
 
 ?>
 
@@ -53,16 +60,16 @@ $dados = $ProdutoRepository->findAll();
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($dados as $Item) : ?>
+          <?php foreach ($todosProdutos as $Item) : ?>
             <tr>
-              <td><?= $Item->get_name() ?></td>
-              <td><?= $Item->get_type() ?></td>
-              <td><?= $Item->get_description() ?></td>
-              <td><?= $Item->get_price()->format() ?></td>
-              <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>
+              <td><?= $Item->getNome() ?></td>
+              <td><?= $Item->getTipo() ?></td>
+              <td><?= $Item->getDescricao() ?></td>
+              <td><?= $Item->getPreco()->format() ?></td>
+              <td><a class="botao-editar" href="editar-produto.php?id=<?=$Item->getId()?>">Editar</a></td>
               <td>
                   <form action="excluir-produto.php" method="post">
-                      <input type="hidden" name="id" value="<?= htmlspecialchars($Item->getId()) ?>">
+                      <input type="hidden" name="id" value="<?= $Item->getId()?>">
                       <button type="submit" class="botao-excluir" onclick="return confirm('Tem certeza que deseja excluir este produto?')">
                           Excluir
                       </button>
@@ -74,7 +81,7 @@ $dados = $ProdutoRepository->findAll();
         </tbody>
       </table>
       <div class="conteiner__link_cadasto__form_baixar">
-        <a class="botao-cadastrar" href="cadastrar-produto.html">Cadastrar produto</a>
+        <a class="botao-cadastrar" href="cadastrar-produto.php">Cadastrar produto</a>
         <form action="#" method="post">
           <input type="submit" class="botao-cadastrar" value="Baixar Relatório" />
         </form>

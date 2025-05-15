@@ -1,6 +1,7 @@
 {
-  "name": "victor0x/crud",
-  "description": "crud",
+  "name": "crud/restaurante",
+  "description": "Sistema de cadastro de produtos para restaurante",
+  "type": "project",
 
   "autoload": {
     "psr-4": {
@@ -9,6 +10,6 @@
   },
 
   "require": {
-    "ext-pdo": "*"
+    "php": ">=8.0"
   }
 }
