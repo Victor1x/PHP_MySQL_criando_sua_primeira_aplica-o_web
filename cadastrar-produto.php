@@ -12,8 +12,8 @@
     $produtoRepository       = new ProdutoRepository($connection);
     $cadastrarProdutoService = new CadastrarProdutoService($produtoRepository);
     $controller              = new CadastrarProdutoController($cadastrarProdutoService);
-    
-    
+
+
     if (isset($_POST['cadastro'])) {
         $controller->handle($_POST, $_FILES['imagem']['name']);
         header("Location: admin.php");
@@ -40,10 +40,15 @@
     <title>Serenatto - Cadastrar Produto</title>
 </head>
 <body>
-  
-    <section class="container-admin-banner">
-        <img src="img/logo-serenatto-horizontal.png" class="logo-admin" alt="logo-serenatto">
-        <h1>Cadastro de Produtos</h1>
+    <main>
+        <section class="container-admin-banner">
+            <a href="index.php">
+                <img
+                        src="img/logo-serenatto-horizontal.png"
+                        class="logo-admin"
+                        alt="logo-serenatto"
+                /></a>
+            <h1>Cadastro de Produtos</h1>
         <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
     </section>
     <section class="container-form">
@@ -74,10 +79,6 @@
     </section>
 </main>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"
-        integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="js/index.js"></script>
 </body>
 </html>

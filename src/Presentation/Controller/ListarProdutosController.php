@@ -13,7 +13,7 @@ class ListarProdutosController
         $this->listarProdutosService = $listarProdutosService;
     }
 
-    public function handle(?int $id = null): array
+    public function handle(): array
     {
         $produtosCafe = $this->listarProdutosService->buscarPorTipo("Café")->getProdutos();
         $produtosAlmoco = $this->listarProdutosService->buscarPorTipo("Almoço")->getProdutos();

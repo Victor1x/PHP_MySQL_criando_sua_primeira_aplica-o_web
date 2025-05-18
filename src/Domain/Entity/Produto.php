@@ -7,27 +7,17 @@ use Crud\Domain\ValueObject\Money;
 
 class Produto
 {
-    private ?int $id;
-    private string $tipo;
-    private string $nome;
-    private string $descricao;
-    private Money $preco;
-    private ?ImageFilename $imagem ;
+
 
     public function __construct(
-        ?int $id,
-        string $tipo,
-        string $nome,
-        string $descricao,
-        Money $preco,
-        ?ImageFilename $imagem = null
+       private ?int $id,
+       private string $tipo,
+       private string $nome,
+       private string $descricao,
+       private Money $preco,
+       private ?ImageFilename $imagem = null
     ) {
-        $this->id = $id;
-        $this->tipo = $tipo;
-        $this->nome = $nome;
-        $this->descricao = $descricao;
-        $this->preco = $preco;
-        $this->imagem = $imagem;
+
     }
 
     public function getId(): ?int
@@ -73,4 +63,4 @@ class Produto
         $this->preco = $preco;
         $this->imagem = $imagem;
     }
-} 
+}

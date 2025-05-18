@@ -12,8 +12,10 @@ $produtoRepository = new ProdutoRepository($connection);
 $listarProdutosService = new ListarProdutosService($produtoRepository);
 $controller = new ListarProdutosController($listarProdutosService);
 
-$dados = $controller->handle(1);
+$dados = $controller->handle();
+
 $dadosCafe = $dados['cafe'];
+
 $dadoslunch = $dados['almoco'];
 ?>
 
@@ -44,7 +46,7 @@ $dadoslunch = $dados['almoco'];
         <nav>
             <ul>
                 <li><a href="login.php">Login</a></li>
-                <li><a href="cadastro.php">Cadastro</a></li>
+                <li><a href="cadastro-usuario.php">Cadastro</a></li>
             </ul>
         </nav>
     </header>
@@ -65,11 +67,11 @@ $dadoslunch = $dados['almoco'];
             <?php foreach ($dadosCafe as $coffeeItem): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="<?php echo $coffeeItem->getImagem()->getPath() ?>" alt="fotos do produtos">
+                        <img src="<?= $coffeeItem->getImagem()->getPath() ?>" alt="fotos do produtos">
                     </div>
-                    <p><?= $coffeeItem->getNome() ?></p>   <!--esse previacao sigifica php echo-->
-                    <p><?php echo $coffeeItem->getDescricao() ?></p>
-                    <p><?php echo $coffeeItem->getPreco()->format() ?></p>
+                    <p><?= $coffeeItem->getNome() ?></p>   <!--esse previacao sigifica =-->
+                    <p><?= $coffeeItem->getDescricao() ?></p>
+                    <p><?= $coffeeItem->getPreco()->format() ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -84,11 +86,11 @@ $dadoslunch = $dados['almoco'];
             <?php foreach ($dadoslunch as $lunchItem): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="<?php echo $lunchItem->getImagem()->getPath() ?>" alt="fotos do produtos">
+                        <img src="<?= $lunchItem->getImagem()->getPath() ?>" alt="fotos do produtos">
                     </div>
-                    <p><?php echo $lunchItem->getNome() ?></p> <!--esse previacao sigifica php echo-->
-                    <p><?php echo $lunchItem->getDescricao() ?></p>
-                    <p><?php echo $lunchItem->getPreco()->format() ?></p>
+                    <p><?= $lunchItem->getNome() ?></p> <!--esse previacao sigifica =-->
+                    <p><?= $lunchItem->getDescricao() ?></p>
+                    <p><?= $lunchItem->getPreco()->format() ?></p>
                 </div>
             <?php endforeach; ?>
         </div>

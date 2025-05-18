@@ -1,155 +1,156 @@
 body {
-    background-color: #333b1e;
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: #333b1e;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container-cadastro {
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    /* max-width: 480px; */
-    padding: 2rem;
-    margin: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  padding: 20px;
 }
 
 .cadastro-logo {
-    text-align: center;
-    margin-bottom: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .cadastro-logo img {
-    max-width: 300px;
-    height: auto;
+  max-width: 300px;
+  height: auto;
 }
 
+.container-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
 .cadastro-form h1 {
-    color: #333b1e;
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 2rem;
+  color: #333b1e;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
 }
 
 .form-group label {
-    display: block;
-    color: #333b1e;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+  color: #ebc181;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 .form-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid #EBC181;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+  max-width: 100%;
+  padding: 10px;
+  border: 3px solid transparent;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
 
 .form-group input:focus {
-    outline: none;
-    border-color: #9B8357;
+  border-color: #9b8357;
+  outline: none;
 }
 
-.botao-cadastrar {
-    background-color: #EBC181;
-    color: #333B1E;
-    border: none;
-    border-radius: 8px;
-    padding: 1rem;
-    width: 100%;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.inputs{
+  margin-left:5px;
+}
+.btn-cadastrar {
+  background-color: #ebc181;
+  color: #333b1e;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.botao-cadastrar:hover {
-    background-color: #9B8357;
-    color: #fff;
+.btn-cadastrar:hover {
+  background-color: #9b8357;
+  color: #fff;
 }
-
 .links {
-    text-align: center;
-    margin-top: 1.5rem;
+  text-align: center;
+  margin-top: 1.5rem;
 }
 
 .links p {
-    color: #333b1e;
-    font-size: 0.9rem;
+  /* color: #333b1e; */
+  font-size: 0.9rem;
 }
 
 .links a {
-    color: #9B8357;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
+  color: #9b8357;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .links a:hover {
-    color: #EBC181;
+  color: #ebc181;
 }
 
 /* Responsividade */
 @media (max-width: 480px) {
-    .container-cadastro {
-        margin: 1rem;
-        padding: 1.5rem;
-    }
+  .container-cadastro {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
 
-    .cadastro-form h1 {
-        font-size: 1.5rem;
-    }
+  .cadastro-form h1 {
+    font-size: 1.5rem;
+  }
 
-    .cadastro-logo img {
-        max-width: 200px;
-    }
+  .cadastro-logo img {
+    max-width: 200px;
+  }
 }
 
 /* Animações */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .container-cadastro {
-    animation: fadeIn 0.5s ease-out;
-}
-
-/* Feedback Visual */
-.form-group input:invalid {
-    border-color: #ff6b6b;
-}
-
-.form-group input:valid {
-    border-color: #51cf66;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* Mensagens de Erro */
 .erro {
-    color: #ff6b6b;
-    font-size: 0.85rem;
-    margin-top: 0.3rem;
-    display: none;
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  display: none;
 }
 
 .form-group input:invalid + .erro {
-    display: block;
-} 
+  display: block;
+}

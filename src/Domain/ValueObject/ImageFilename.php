@@ -2,8 +2,6 @@
 
 namespace Crud\Domain\ValueObject;
 
-use InvalidArgumentException;
-
 final class ImageFilename
 {
     private ?string $filename;
@@ -22,7 +20,7 @@ final class ImageFilename
 
     public function getPath(): string
     {
-        return "img/{$this->filename}";
+        return "img/$this->filename";
     }
 
     public function equals(ImageFilename $other): bool

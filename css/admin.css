@@ -101,7 +101,7 @@ table tbody tr td a:hover, .botao-cadastrar:hover, .botao-excluir:hover {
     background: #EBC181;
     color: #333B1E;
     font-weight: 600;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     font-size: 20px;
     border-radius: 10px;
     padding: 10px 10px;

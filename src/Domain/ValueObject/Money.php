@@ -10,7 +10,7 @@ final class Money{
     public function __construct(float $amount, string $currency = 'BRL')
     {
         if ($amount < 0) {
-            throw new InvalidArgumentException("O valor não pode ser negativo: {$amount}");
+            throw new InvalidArgumentException("O valor não pode ser negativo: $amount");
         }
         $this->amount   = $amount;
         $this->currency = $currency;
