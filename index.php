@@ -44,9 +44,10 @@ $dadoslunch = $dados['almoco'];
 <body>
 <header>
         <nav>
-            <ul>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="cadastro-usuario.php">Cadastro</a></li>
+            <ul class="ul__header">
+                <li class="li__header"><img src="img/icone-serenatto.png" alt=""></li>
+                <li class="li__header" ><a href="login.php">Login</a></li>
+                
             </ul>
         </nav>
     </header>

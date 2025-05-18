@@ -111,20 +111,36 @@ h2 {
 }
 
 
-
-header{
-border: 2px solid red;
-}
 nav{
   display: flex;
   justify-content: end;
-  border: 2px solid blue;
 
 }
-ul{
+.ul__header{
   display: flex;
-  justify-content: space-around;
-  border: 2px solid green;
+  width: 100%;
+  justify-content: space-between;
   gap: 20px	;
 }
-
+.li__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px  20px ;
+}
+.li__header img {
+  width: 70px;
+}
+.li__header a {
+  text-decoration: none;
+  font-size: 20px;
+  padding: 10px 15px;
+  color: #ffff;
+  background: #BC9A67;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.li__header a:hover{
+  background: #9B8357;
+}

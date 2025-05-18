@@ -52,7 +52,7 @@ $usuarioController->handle($_POST);
                 class="logo-admin"
                 alt="logo-serenatto"
         /></a>
-        <h1>Login Serenatto</h1>
+        <h1>Login</h1>
         <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments"/>
     </section>
     <section class="container-form">

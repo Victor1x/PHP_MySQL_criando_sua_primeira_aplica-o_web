@@ -43,7 +43,7 @@ $todosProdutos = $dados['todosProdutos'];
   <main>
     <section class="container-admin-banner">
       <img src="img/logo-serenatto-horizontal.png" class="logo-admin" alt="logo-serenatto">
-      <h1>Admistração Serenatto</h1>
+      <h1>Admistração</h1>
       <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
     </section>
     <h2>Lista de Produtos</h2>
