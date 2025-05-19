@@ -21,4 +21,4 @@ $dompdf->setPaper('landscape');
 $dompdf->render();
 
 // Output the generated PDF to Browser
-$dompdf->stream();eam ();
+$dompdf->stream();

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/vendor/autoload.php";
+require_once __DIR__ . "/../vendor/autoload.php";
 
 use Crud\Application\Service\ListarProdutosService;
 use Crud\Infrastructure\Persistence\Connection;
@@ -35,11 +35,10 @@ $todosProdutos = $dados['todosProdutos'];
         }
 
         table th{
-            padding: 11px 0 11px;
+            padding: 11px 8px;
             font-weight: bold;
             font-size: 18px;
             text-align: left;
-            padding: 8px;
         }
 
         table tr{
@@ -54,6 +53,7 @@ $todosProdutos = $dados['todosProdutos'];
             margin-top: 40px;
             font-size: 30px;
     </style>
+    <title>PDF</title>
 </head>
 
 <body>

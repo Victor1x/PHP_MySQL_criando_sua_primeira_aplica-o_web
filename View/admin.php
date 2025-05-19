@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/vendor/autoload.php";
+require_once __DIR__ . "/../vendor/autoload.php";
 
 use Crud\Application\Service\ListarProdutosService;
 use Crud\Infrastructure\Persistence\Connection;
@@ -28,12 +28,12 @@ $todosProdutos = $dados['todosProdutos'];
   <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/admin.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" href="img/icone-serenatto.png" type="image/x-icon">
+  <link rel="icon" href="../img/icone-serenatto.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@ $todosProdutos = $dados['todosProdutos'];
 <header>
     <nav>
         <ul class="ul__header">
-            <li class="li__header"><img src="img/icone-serenatto.png" alt=""></li>
+            <li class="li__header"><img src="../img/icone-serenatto.png" alt=""></li>
             <li class="li__header" ><a href="logout.php">Sair</a></li>
 
         </ul>
@@ -52,9 +52,9 @@ $todosProdutos = $dados['todosProdutos'];
 </header>
   <main>
     <section class="container-admin-banner">
-      <img src="img/logo-serenatto-horizontal.png" class="logo-admin" alt="logo-serenatto">
+      <img src="../img/logo-serenatto-horizontal.png" class="logo-admin" alt="logo-serenatto">
       <h1>Admistração</h1>
-      <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
+      <img class="ornaments" src="../img/ornaments-coffee.png" alt="ornaments">
     </section>
     <h2>Lista de Produtos</h2>
 
@@ -98,7 +98,6 @@ $todosProdutos = $dados['todosProdutos'];
       </div>
     </section>
   </main>
-<script src="js/destroy_session.js"></script>
 </body>
 
 </html>

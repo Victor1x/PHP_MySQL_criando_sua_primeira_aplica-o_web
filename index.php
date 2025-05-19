@@ -45,7 +45,7 @@ $dadoslunch = $dados['almoco'];
         <nav>
             <ul class="ul__header">
                 <li class="li__header"><img src="img/icone-serenatto.png" alt=""></li>
-                <li class="li__header" ><a href="login.php">Login</a></li>
+                <li class="li__header" ><a href="View/login.php">Login</a></li>
                 
             </ul>
         </nav>
