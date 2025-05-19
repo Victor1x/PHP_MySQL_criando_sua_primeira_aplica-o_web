@@ -3,3 +3,4 @@ document.querySelectorAll(".container-produto").forEach((item) => {
     alert("Produto clicado!");
   });
 });
+

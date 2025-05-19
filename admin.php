@@ -5,9 +5,10 @@ use Crud\Application\Service\ListarProdutosService;
 use Crud\Infrastructure\Persistence\Connection;
 use Crud\Infrastructure\Repository\ProdutoRepository;
 use Crud\Presentation\Controller\ListarProdutosController;
+use Crud\Presentation\Controller\Middleware\AuthMiddleware;
 
+AuthMiddleware::check();
 $connection = Connection::getConnection();
-
 $produtoRepository = new ProdutoRepository($connection);
 $listarProdutosService = new ListarProdutosService($produtoRepository);
 $controller = new ListarProdutosController($listarProdutosService);
@@ -40,6 +41,15 @@ $todosProdutos = $dados['todosProdutos'];
 </head>
 
 <body>
+<header>
+    <nav>
+        <ul class="ul__header">
+            <li class="li__header"><img src="img/icone-serenatto.png" alt=""></li>
+            <li class="li__header" ><a href="logout.php">Sair</a></li>
+
+        </ul>
+    </nav>
+</header>
   <main>
     <section class="container-admin-banner">
       <img src="img/logo-serenatto-horizontal.png" class="logo-admin" alt="logo-serenatto">
@@ -82,12 +92,13 @@ $todosProdutos = $dados['todosProdutos'];
       </table>
       <div class="conteiner__link_cadasto__form_baixar">
         <a class="botao-cadastrar" href="cadastrar-produto.php">Cadastrar produto</a>
-        <form action="#" method="post">
+        <form action="gerador-pdf.php" >
           <input type="submit" class="botao-cadastrar" value="Baixar Relatório" />
         </form>
       </div>
     </section>
   </main>
+<script src="js/destroy_session.js"></script>
 </body>
 
 </html>

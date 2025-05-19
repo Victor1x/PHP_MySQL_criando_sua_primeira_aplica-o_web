@@ -1,23 +1,25 @@
 <?php
 
-    require_once __DIR__ . "/vendor/autoload.php";
+require_once __DIR__ . "/vendor/autoload.php";
 
-    use Crud\Application\Service\CadastrarProdutoService;
-    use Crud\Infrastructure\Persistence\Connection;
-    use Crud\Infrastructure\Repository\ProdutoRepository;
-    use Crud\Presentation\Controller\CadastrarProdutoController;
+use Crud\Application\Service\CadastrarProdutoService;
+use Crud\Infrastructure\Persistence\Connection;
+use Crud\Infrastructure\Repository\ProdutoRepository;
+use Crud\Presentation\Controller\CadastrarProdutoController;
+use Crud\Presentation\Controller\Middleware\AuthMiddleware;
 
-    $connection = Connection::getConnection();
+AuthMiddleware::check();
+$connection = Connection::getConnection();
 
-    $produtoRepository       = new ProdutoRepository($connection);
-    $cadastrarProdutoService = new CadastrarProdutoService($produtoRepository);
-    $controller              = new CadastrarProdutoController($cadastrarProdutoService);
+$produtoRepository = new ProdutoRepository($connection);
+$cadastrarProdutoService = new CadastrarProdutoService($produtoRepository);
+$controller = new CadastrarProdutoController($cadastrarProdutoService);
 
 
-    if (isset($_POST['cadastro'])) {
-        $controller->handle($_POST, $_FILES['imagem']['name']);
-        header("Location: admin.php");
-    }
+if (isset($_POST['cadastro'])) {
+    $controller->handle($_POST, $_FILES['imagem']['name']);
+    header("Location: admin.php");
+}
 ?>
 
 <!doctype html>
@@ -40,15 +42,15 @@
     <title>Serenatto - Cadastrar Produto</title>
 </head>
 <body>
-    <main>
-        <section class="container-admin-banner">
-            <a href="index.php">
-                <img
-                        src="img/logo-serenatto-horizontal.png"
-                        class="logo-admin"
-                        alt="logo-serenatto"
-                /></a>
-            <h1>Cadastro de Produtos</h1>
+<main>
+    <section class="container-admin-banner">
+        <a href="index.php">
+            <img
+                    src="img/logo-serenatto-horizontal.png"
+                    class="logo-admin"
+                    alt="logo-serenatto"
+            /></a>
+        <h1>Cadastro de Produtos</h1>
         <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
     </section>
     <section class="container-form">
@@ -79,6 +81,6 @@
     </section>
 </main>
 
-<script src="js/index.js"></script>
+<script src="js/destroy_session.js"></script>
 </body>
 </html>

@@ -11,7 +11,6 @@ $pdo = Connection::getConnection();
 $usuarioRepository = new UsuarioRepository($pdo);
 $usuarioService = new LoginUsuarioService($usuarioRepository);
 $usuarioController = new LoginUsuarioController($usuarioService);
-
 $usuarioController->handle($_POST);
 
 ?>
@@ -63,7 +62,7 @@ $usuarioController->handle($_POST);
                     id="email"
                     name="email"
                     placeholder="Digite o seu e-mail"
-                    required
+
             />
 
             <label for="password">Senha :</label>
@@ -72,7 +71,7 @@ $usuarioController->handle($_POST);
                     id="password"
                     name="senha"
                     placeholder="Digite a sua senha"
-                    required
+
             />
 
             <input type="submit" name="login" class="botao-cadastrar" value="Entrar"/>

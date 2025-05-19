@@ -1,36 +1,38 @@
 <?php
 
-    require_once __DIR__ . "/vendor/autoload.php";
+require_once __DIR__ . "/vendor/autoload.php";
 
-    use Crud\Application\Service\BuscarProdutoService;
-    use Crud\Application\Service\EditarProdutoService;
-    use Crud\Infrastructure\Persistence\Connection;
-    use Crud\Infrastructure\Repository\ProdutoRepository;
-    use Crud\Presentation\Controller\BuscarProdutoController;
-    use Crud\Presentation\Controller\EditarProdutoController;
+use Crud\Application\Service\BuscarProdutoService;
+use Crud\Application\Service\EditarProdutoService;
+use Crud\Infrastructure\Persistence\Connection;
+use Crud\Infrastructure\Repository\ProdutoRepository;
+use Crud\Presentation\Controller\BuscarProdutoController;
+use Crud\Presentation\Controller\EditarProdutoController;
+use Crud\Presentation\Controller\Middleware\AuthMiddleware;
 
-    if (! isset($_GET['id'])) {
-        header("Location: admin.php");
-        exit;
-    }
 
-    $connection        = Connection::getConnection();
-    $produtoRepository = new ProdutoRepository($connection);
+if (!isset($_GET['id'])) {
+    header("Location: admin.php");
+    exit;
+}
+AuthMiddleware::check();
+$connection = Connection::getConnection();
+$produtoRepository = new ProdutoRepository($connection);
 
-    $buscarProdutoService = new BuscarProdutoService($produtoRepository);
-    $controller           = new BuscarProdutoController($buscarProdutoService);
+$buscarProdutoService = new BuscarProdutoService($produtoRepository);
+$controller = new BuscarProdutoController($buscarProdutoService);
 
-    $produto = $controller->handle((int) $_GET['id']);
+$produto = $controller->handle((int)$_GET['id']);
 
-    $editarProdutoService = new EditarProdutoService($produtoRepository);
-    $editarController           = new EditarProdutoController($editarProdutoService);
+$editarProdutoService = new EditarProdutoService($produtoRepository);
+$editarController = new EditarProdutoController($editarProdutoService);
 
-if (isset($_FILES['imagem']) && $_FILES['imagem']['name'] ==! "" ) {
+if (isset($_FILES['imagem']) && empty($_FILES['imagem']['name'])) {
     $nomeImagem = $_FILES['imagem']['name'];
 } else {
     $nomeImagem = $produto->getImagem()->getFileName();
 }
-    if (isset($_POST['editar'])) {
+if (isset($_POST['editar'])) {
     $editarController->handle($_POST, $nomeImagem);
     var_dump($_POST);
 //    header("Location: admin.php");
@@ -66,7 +68,8 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['name'] ==! "" ) {
                     src="img/logo-serenatto-horizontal.png"
                     class="logo-admin"
                     alt="logo-serenatto"
-            /></a>        <h1>Editar Produto</h1>
+            /></a>
+        <h1>Editar Produto</h1>
         <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
     </section>
     <section class="container-form">
@@ -133,19 +136,21 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['name'] ==! "" ) {
                     accept="image/*"
                     id="imagem"
                     placeholder="Envie uma imagem"
-                    >
+            >
 
             <input
                     type="submit"
                     name="editar"
                     class="botao-cadastrar"
                     value="Editar produto"/>
-                    
+
         </form>
 
     </section>
 </main>
 
 <script src="js/index.js"></script>
+<script src="js/destroy_session.js"></script>
+
 </body>
 </html>

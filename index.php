@@ -15,7 +15,6 @@ $controller = new ListarProdutosController($listarProdutosService);
 $dados = $controller->handle();
 
 $dadosCafe = $dados['cafe'];
-
 $dadoslunch = $dados['almoco'];
 ?>
 
