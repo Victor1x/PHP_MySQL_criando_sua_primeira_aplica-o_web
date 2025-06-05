@@ -39,7 +39,7 @@ final class Senha
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        if ($hash) {
+        if (!$hash) {
             throw new RuntimeException('Falha ao gerar o hash da senha.');
         }
 

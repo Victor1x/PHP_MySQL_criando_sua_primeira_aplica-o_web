@@ -1,12 +1,19 @@
 <?php
 
+
+
 use Crud\Application\Service\LoginUsuarioService;
 use Crud\Infrastructure\Persistence\Connection;
 use Crud\Infrastructure\Repository\UsuarioRepository;
 use Crud\Presentation\Controller\LoginUsuarioController;
 
 require_once __DIR__ . "/../vendor/autoload.php";
-
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();  // Inicia sessão PHP
+}
+if (isset($_SESSION['usuario_id'])) {
+  header('Location: admin.php');
+}
 $pdo = Connection::getConnection();
 $usuarioRepository = new UsuarioRepository($pdo);
 $usuarioService = new LoginUsuarioService($usuarioRepository);

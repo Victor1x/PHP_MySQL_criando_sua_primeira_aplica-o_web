@@ -25,7 +25,7 @@ class LogoutUsuarioController
                 $params['path'],       // Mesmo caminho do cookie anterior
                 $params['domain'],     // Mesmo domínio
                 $params['secure'],     // Mesma configuração de segurança
-                $params['http                               only']    // Mesma configuração de HTTP only
+                $params['httponly']    // Mesma configuração de HTTP only
             );
         }
 
